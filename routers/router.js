@@ -13,7 +13,7 @@ router.get('/pedidos/pendentes', pedidosController.listarPendentes);
 router.get('/pedidos/concluidos', pedidosController.listarConcluidos);
 
 router.post('/pedidos', pedidosController.criarNovoPedido);
-router.patch('/pedidos/:id/concluir', pedidosController.criarNovoPedido);
+router.patch('/pedidos/:id/concluir', pedidosController.concluirNovoPedido);
 router.post('/avaliacoes', avaliacaoController.criar);
 
 export default router;
