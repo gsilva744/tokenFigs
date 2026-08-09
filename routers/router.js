@@ -12,8 +12,8 @@ router.get('/pedidos', pedidosController.listarTodos);
 router.get('/pedidos/pendentes', pedidosController.listarPendentes);
 router.get('/pedidos/concluidos', pedidosController.listarConcluidos);
 
-router.post('/pedidos', pedidosController.criar);
-router.patch('/pedidos/:id/concluir', pedidosController.concluir);
+router.post('/pedidos', pedidosController.criarNovoPedido);
+router.patch('/pedidos/:id/concluir', pedidosController.criarNovoPedido);
 router.post('/avaliacoes', avaliacaoController.criar);
 
 export default router;

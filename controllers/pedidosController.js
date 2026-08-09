@@ -34,7 +34,7 @@ class PedidosController {
         }
     }
 
-    async criar(req, res) {
+    async criarNovoPedido(req, res) {
         const { pedido, cliente, email, telefone, sexualidade, foi_aluno: foiAluno } = req.body;
 
         if (!pedido || !cliente || !email || !telefone || !sexualidade || typeof foiAluno !== 'boolean') {
@@ -53,7 +53,7 @@ class PedidosController {
         }
     }
 
-    async concluir(req, res) {
+    async concluirNovoPedido(req, res) {
         const id = Number(req.params.id);
 
         if (!Number.isInteger(id) || id <= 0) {

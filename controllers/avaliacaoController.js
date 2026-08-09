@@ -13,12 +13,12 @@ class AvaliacaoController {
         try {
             const novaAvaliacao = await avaliacaoService.enviarAvaliacao({
                 cliente: cliente.trim(),
-                avaliacao: avaliacao.trim()
+                avaliacao: avaliacao
             });
 
             return res.status(201).json(novaAvaliacao);
         } catch (error) {
-            console.error('Erro ao enviar avaliação:', error);
+            console.error('Erro ao enviar avaliação: ', error);
             return res.status(500).json({ erro: 'Não foi possível enviar a avaliação.' });
         }
     }
