@@ -23,7 +23,7 @@
         <form action="processar_cadastro.php" method="POST">
             <input class="nome" type="text" name="nome" placeholder="Nome" required><br>
             <input class="email" type="email" name="email" placeholder="Email" required><br>
-            <input class="numero" type="password" name="número" placeholder="número" required><br>
+            <input class="numero" type="phone" name="número" placeholder="número" required><br>
         </form>
     </div>
 
@@ -31,13 +31,11 @@
   <ul>
     
     <li class="dropdown">
-      <a href="#" class="titulo-genero">Gênero ▾</a>
-      <ul class="submenu">
-        <li><a href="#">Homem</a></li>
-        <li><a href="#">Mulher</a></li>
-        <li><a href="#">Outro</a></li>
-        <li><a href="#">Prefiro não informar</a></li>
-      </ul>
+      <select>
+        <option value="masculino">Masculino</option>
+        <option value="feminino">Feminino</option>
+        <option value="outro">Outro</option>
+      </select>
     </li>
   </ul>
 </nav>
