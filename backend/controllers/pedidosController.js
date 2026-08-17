@@ -1,13 +1,16 @@
 import pedidosService from '../services/pedidosService.js';
+import logError from '../utils/logError.js';
 
 class PedidosController {
     async listarTodos(req, res) {
         try {
             const pedidos = await pedidosService.getTodosPedidos();
 
+            if(!pedidos) throw new Error("Erro na hora de buscar os pedidos")
+
             return res.status(200).json(pedidos);
         } catch (error) {
-            console.error('Erro ao listar pedidos:', error);
+            logError(error)
             return res.status(500).json({ erro: 'Não foi possível listar os pedidos.' });
         }
     }
@@ -18,7 +21,7 @@ class PedidosController {
 
             return res.status(200).json(pedidos);
         } catch (error) {
-            console.error('Erro ao listar pedidos concluídos:', error);
+            logError(error)
             return res.status(500).json({ erro: 'Não foi possível listar os pedidos concluídos.' });
         }
     }
@@ -29,18 +32,16 @@ class PedidosController {
 
             return res.status(200).json(pedidos);
         } catch (error) {
-            console.error('Erro ao listar pedidos pendentes:', error);
+            logError(error)
             return res.status(500).json({ erro: 'Não foi possível listar os pedidos pendentes.' });
         }
     }
 
     async criarNovoPedido(req, res) {
-        const { pedido, cliente, email, telefone, sexualidade, foi_aluno: foiAluno } = req.body;
+        const { pedido, cliente, email, telefone, sexualidade, foiAluno } = req.body;
 
         if (!pedido || !cliente || !email || !telefone || !sexualidade || typeof foiAluno !== 'boolean') {
-            return res.status(400).json({
-                erro: 'pedido, cliente, email, telefone, sexualidade e foi_aluno são obrigatórios.'
-            });
+            throw new Error("Digite os campos corretamente!")
         }
 
         try {
@@ -57,7 +58,7 @@ class PedidosController {
         const id = Number(req.params.id);
 
         if (!Number.isInteger(id) || id <= 0) {
-            return res.status(400).json({ erro: 'O id do pedido deve ser um número inteiro positivo.' });
+            throw new Error("O id do pedido deve ser positivo e inteiro")
         }
 
         try {
@@ -69,7 +70,7 @@ class PedidosController {
 
             return res.status(200).json(pedido);
         } catch (error) {
-            console.error('Erro ao concluir pedido:', error);
+            logError(error)
             return res.status(500).json({ erro: 'Não foi possível concluir o pedido.' });
         }
     }

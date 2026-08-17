@@ -1,13 +1,12 @@
 import avaliacaoService from '../services/avalicacaoService.js';
+import logError from '../utils/logError.js';
 
 class AvaliacaoController {
     async criar(req, res) {
         const { cliente, avaliacao } = req.body;
 
         if (typeof cliente !== 'string' || typeof avaliacao !== 'number') {
-            return res.status(400).json({
-                erro: 'cliente e avaliacao são obrigatórios.'
-            });
+            throw new Error("Digite os campos corretamente!")
         }
 
         try {
@@ -18,7 +17,7 @@ class AvaliacaoController {
 
             return res.status(201).json(novaAvaliacao);
         } catch (error) {
-            console.error('Erro ao enviar avaliação: ', error);
+            logError(error)
             return res.status(500).json({ erro: 'Não foi possível enviar a avaliação.' });
         }
     }
